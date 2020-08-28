@@ -45,12 +45,12 @@ if __name__=='__main__':
   print(params)
 
   # fix seed
-  if params.seed != 41608:
-    torch.manual_seed(params.seed)
-    torch.backends.cudnn.deterministic = True
-    torch.backends.cudnn.benchmark = False
-    np.random.seed(params.seed)
-    random.seed(params.seed)
+  # if params.seed != 41608:
+  #   torch.manual_seed(params.seed)
+  #   torch.backends.cudnn.deterministic = True
+  #   torch.backends.cudnn.benchmark = False
+  #   np.random.seed(params.seed)
+  #   random.seed(params.seed)
 
   # output and tensorboard directory
   params.tf_dir = '%s/log/%s'%(params.save_dir, params.name)

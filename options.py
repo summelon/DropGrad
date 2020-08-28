@@ -1,9 +1,19 @@
-import numpy as np
 import os
 import glob
+import torch
 import argparse
+import numpy as np
+
+
+def fix_seed():
+    torch.manual_seed(666)
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = False
+    np.random.seed(666)
+
 
 def parse_args(script):
+    fix_seed()
     parser = argparse.ArgumentParser(description= 'few-shot script %s' %(script))
     parser.add_argument('--dataset'     , default='miniImagenet',  help='miniImagenet/cub')
     parser.add_argument('--model'       , default='ResNet18',      help='model: Conv{4|6} / ResNet{10|18|34|50|101}') # we use ResNet18 in the paper
@@ -14,7 +24,7 @@ def parse_args(script):
     parser.add_argument('--train_aug'   , action='store_true',  help='perform data augmentation or not during training ')
     parser.add_argument('--name'        , default='tmp', type=str, help='')
     parser.add_argument('--save_dir'    , default='./output', type=str, help='')
-    parser.add_argument('--data_dir'    , default='./filelists', type=str, help='')
+    parser.add_argument('--data_dir'    , default='/home/data/few_shot', type=str, help='')
 
     if script == 'train':
         parser.add_argument('--num_classes' , default=200, type=int, help='total number of classes in softmax, only used in baseline')
